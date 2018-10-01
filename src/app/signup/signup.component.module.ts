@@ -1,0 +1,36 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
+
+import { SignUpRoutes } from './signup.routing';
+import { SignUpComponent } from './signup.component';
+
+import { ULRProvider } from '../providers/url.providers';
+
+import {
+  DxTextBoxModule,
+  DxValidatorModule,
+  DxValidationSummaryModule,
+  DxButtonModule
+} from 'devextreme-angular';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    RouterModule.forChild(SignUpRoutes),
+    FormsModule,
+    DxTextBoxModule,
+    DxValidatorModule,
+    DxValidationSummaryModule,
+    DxButtonModule
+  ],
+  declarations: [
+    SignUpComponent
+  ],
+  providers: [
+    ULRProvider
+  ]
+})
+
+export class SignUpModule {}
