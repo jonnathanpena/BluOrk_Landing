@@ -1,25 +1,40 @@
 import { ULRProvider } from '../providers/url.providers';
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class  SignUpProvider {
+  httpOptions: any = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Authorization': 'my-auth-token'
+    })
+  };
 
   constructor(
-    private http: Http,
-    private urlProvider: ULRProvider) {}
+    private urlProvider: ULRProvider,
+    private http: HttpClient
+  ) {}
 
-  /*public allUsuarios() {
-    return this.http.get(this.urlProvider.getAllUsers())
-    .map((res: Response) => res.json());
+  public allUsers() {
+    return this.http.get(this.urlProvider.getAllUsers());
   }
 
-  public insertUsuarioDepartamento(objeto: any) {
-    return this.http.post(this.urlProvider.insertUsuarioDepartamento(), JSON.stringify(objeto), {
-      headers: new Headers({'Content-Type': 'application/json'})
-    })
-      .map((res: Response) => res);
-  }*/
+  public userByEmail(objeto: any) {
+    return this.http.post(this.urlProvider.getUserByEmail(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public userById(objeto: any) {
+    return this.http.post(this.urlProvider.getUserById(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public insertUser(objeto: any) {
+    return this.http.post(this.urlProvider.insertUser(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public updateUser(objeto: any) {
+    return this.http.post(this.urlProvider.updateUser(), JSON.stringify(objeto), this.httpOptions);
+  }
 
 }

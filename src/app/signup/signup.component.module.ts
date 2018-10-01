@@ -7,6 +7,7 @@ import { SignUpRoutes } from './signup.routing';
 import { SignUpComponent } from './signup.component';
 
 import { ULRProvider } from '../providers/url.providers';
+import { SignUpProvider } from './signup.providers';
 
 import {
   DxTextBoxModule,
@@ -29,7 +30,8 @@ import {
     SignUpComponent
   ],
   providers: [
-    ULRProvider
+    ULRProvider,
+    SignUpProvider
   ]
 })
 
