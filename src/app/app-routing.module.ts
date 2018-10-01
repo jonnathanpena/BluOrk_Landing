@@ -8,13 +8,14 @@ export const routes: Routes = [
     path: '',
     component: AppComponent,
     children: [
-        { path: '', redirectTo: '/signup', pathMatch: 'full' },
-        { path: 'signup', loadChildren: './signup/signup.component.module#SignUpModule' }
+        { path: '', redirectTo: '/login', pathMatch: 'full' },
+        { path: 'signup', loadChildren: './signup/signup.component.module#SignUpModule' },
+        { path: 'login', loadChildren: './login/login.module#LoginModule'}
     ]
 },
 {
     path: '**',
-    redirectTo: './signup/signup.component.module#SignUpModule'
+    redirectTo: './login/login.module#LoginModule'
 }
 ];
 
