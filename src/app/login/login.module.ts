@@ -16,6 +16,30 @@ import {
   DxButtonModule
 } from 'devextreme-angular';
 
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from "angular-6-social-login";
+
+// Configs
+export function getAuthServiceConfigs() {
+  const config = new AuthServiceConfig(
+      [
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider('497268304074325')
+        },
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider('295092246487-eq2qpgsagj7u7j1pnkt8oggkurrj8idk.apps.googleusercontent.com')
+        }
+      ]
+  );
+  return config;
+}
+
 @NgModule({
   imports: [
     CommonModule,
@@ -24,14 +48,19 @@ import {
     DxTextBoxModule,
     DxValidatorModule,
     DxValidationSummaryModule,
-    DxButtonModule
+    DxButtonModule,
+    SocialLoginModule
   ],
   declarations: [
     LoginComponent
   ],
   providers: [
     ULRProvider,
-    LoginProvider
+    LoginProvider,
+    {
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
+    }
   ]
 })
 
