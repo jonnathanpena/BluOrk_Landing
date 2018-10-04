@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ULRProvider {
 
-  public dominio: String = 'http://localhost/bluork/api/';
+  public dominio: String = 'http://www.hotspotg.com/bluork/api/';
 
   /* USERS     */
   public getAllUsers() {
