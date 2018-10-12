@@ -1,0 +1,18 @@
+dx-select-box,
+dx-tag-box {
+    margin-bottom: 10px;
+}
+
+dx-text-box {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+dx-button {
+    float: right;
+    margin-left: 10px;
+}
+
+::ng-deep .dx-button .dx-icon {
+    color: #fff;
+}

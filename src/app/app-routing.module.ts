@@ -10,7 +10,8 @@ export const routes: Routes = [
     children: [
         { path: '', redirectTo: '/login', pathMatch: 'full' },
         { path: 'signup', loadChildren: './signup/signup.component.module#SignUpModule' },
-        { path: 'login', loadChildren: './login/login.module#LoginModule'}
+        { path: 'login', loadChildren: './login/login.module#LoginModule'},
+        { path: 'request', loadChildren: './request/request.module#RequestModule'}
     ]
 },
 {
