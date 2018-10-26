@@ -30,7 +30,7 @@
                         <a href="#">Home</a>
                     </li>
                     <li>
-                        <a routerLink="/request" class="site-nav-sub"><i class="fa fa-angle-down site-nav-arrow"></i>Requests</a>
+                        <a routerLink="/request" class="site-nav-sub"><i class="fa fa-angle-down site-nav-arrow"></i>Jobs</a>
                         <ul>
                             <li>
                                 <a routerLink="/request/new">New</a>
@@ -66,19 +66,32 @@
             <div class="row">
                 <div class="col-sm-12 col-xs-12 col-md-8 col-md-offset-2">
                     <form id="form-contact">
-                        <div class="col-sm-12 col-xs-12 col-md-4"></div>
+                        <div class="col-sm-12 col-xs-12 col-md-4">
+                          <div class="form-avatar">
+                            <img id="imagen" [src]="avatar" (mouseenter)="toggleDefault()" (mouseleave)="toggleDefault()" >
+                            <!--<dx-tooltip target="#imagen" [(visible)]="defaultVisible">
+                              <div *dxTemplate="let data = data of 'content'">
+                                Change Avatar
+                              </div>
+                            </dx-tooltip>-->
+                            <dx-file-uploader [uploadUrl]="url" name="file"
+                                  [multiple]="false"  accept="image/*"  [(value)]="image" uploadMode="instantly"
+                                  (onUploaded)="avatarUploaded($event)" (onUploadError)="avatarUploadError($event)">
+                            </dx-file-uploader>
+                          </div>
+                        </div>
                         <div class="col-sm-12 col-xs-12 col-md-8">
                             <div class="form-group">
                                 <label>Seacrh Category</label>
-                                <dx-select-box [items]="categorias" displayExpr="name" valueExpr="id" [searchEnabled]="true" placeholder="Search Category..."></dx-select-box>
+                                <dx-select-box [items]="categorias" displayExpr="name_cat" valueExpr="id_cat" [searchEnabled]="true" placeholder="Search Category..." (onValueChanged)="cambioCategoria($event)"></dx-select-box>
                             </div>
                             <div class="form-group">
                                 <label>Seacrh Subcategory</label>
-                                <dx-select-box [items]="subcategorias" displayExpr="name" valueExpr="id" [searchEnabled]="true" placeholder="Search subcategory..."></dx-select-box>
+                                <dx-select-box [items]="subcategorias" displayExpr="name_subcat" valueExpr="id_detsubcat" [searchEnabled]="true" placeholder="Search subcategory..." ></dx-select-box>
                             </div>
                             <div class="form-group">
                                 <label>Select Tags</label>
-                                <dx-tag-box [items]="tags" displayExpr="name" valueExpr="id" [searchEnabled]="true" placeholders="Select Skills..."></dx-tag-box>
+                                <dx-tag-box [items]="tags" displayExpr="name_tags" valueExpr="id_tags" [searchEnabled]="true" placeholders="Select Skills..."></dx-tag-box>
                             </div>
                         </div>
                         <div class="col-sm-12 col-xs-12 col-md-12">
@@ -99,16 +112,12 @@
                                 </dx-text-area>
                             </div>
                             <div class="form-group">
-                                <label>Search Country</label>
-                                <dx-select-box [items]="paises" displayExpr="name" valueExpr="id" [searchEnabled]="true" placeholder="Search Country..."></dx-select-box>
+                                <label>Search State</label>
+                                <dx-select-box [items]="estados" displayExpr="name_states" valueExpr="id_states" [searchEnabled]="true" placeholder="Search State..." (onValueChanged)="cambioEstado($event)"></dx-select-box>
                             </div>
                             <div class="form-group">
-                                <label>Search State</label>
-                                <dx-select-box [items]="estados" displayExpr="name" valueExpr="id" [searchEnabled]="true" placeholder="Search State..."></dx-select-box>
-                            </div>
-                            <div class="form-group">
-                                <label>Search State</label>
-                                <dx-select-box [items]="ciudades" displayExpr="name" valueExpr="id" [searchEnabled]="true" placeholder="Search City..."></dx-select-box>
+                                <label>Search City</label>
+                                <dx-select-box [items]="ciudades" displayExpr="name_cities" valueExpr="id_cities" [searchEnabled]="true" placeholder="Search City..."></dx-select-box>
                             </div>
                             <div class="form-group">
                                 <label>Zipcode</label>
@@ -123,15 +132,7 @@
                                 <dx-autocomplete style="margin-bottom: 10px;" placeholder="Type Address" [(value)]="request.direccion" [dataSource]="address" (onValueChanged)="updateAddress($event)"></dx-autocomplete>
                             </div>
                             <div class="form-group">
-                                <label>Employment Type</label>
-                                <dx-select-box [items]="paises" displayExpr="name" valueExpr="id" [searchEnabled]="true" placeholder="Select Employment Type..."></dx-select-box>
-                            </div>
-                            <div class="form-group">
-                                <label>Pay Rate</label>
-                                <dx-select-box [items]="paises" displayExpr="name" valueExpr="id" [searchEnabled]="true" placeholder="Select Pay Rate..."></dx-select-box>
-                            </div>
-                            <div class="form-group">
-                                <label>Pay Rate</label>
+                                <label>Pay Amount</label>
                                 <dx-text-box mode="number" class="form-control input-lg" style="margin-bottom: 10px; width: 100%;" placeholder="Compensation">
                                     <dx-validator>
                                         <dxi-validation-rule type="required" message=""></dxi-validation-rule>

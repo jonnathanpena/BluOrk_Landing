@@ -17,12 +17,104 @@ export class  RequestProvider {
     private http: HttpClient
   ) {}
 
-  public allUsers() {
-    return this.http.get(this.urlProvider.getAllUsers());
+  public allCategories() {
+    return this.http.get(this.urlProvider.getAllCategories());
   }
 
-  public userByEmail(objeto: any) {
-    return this.http.post(this.urlProvider.getUserByEmail(), JSON.stringify(objeto), this.httpOptions);
+  public allSubcategories() {
+    return this.http.get(this.urlProvider.getAllSubcategories());
+  }
+
+  public allTags() {
+    return this.http.get(this.urlProvider.getAllTags());
+  }
+
+  public allCountries() {
+    return this.http.get(this.urlProvider.getAllCountries());
+  }
+
+  public allStates() {
+    return this.http.get(this.urlProvider.getAllStates());
+  }
+
+  public allPayRates() {
+    return this.http.get(this.urlProvider.getAllPayRates());
+  }
+
+  public allCities() {
+    return this.http.get(this.urlProvider.getAllCities());
+  }
+
+  public allEmploymetTypes() {
+    return this.http.get(this.urlProvider.getAllEmploymentTypes());
+  }
+
+  public uploadImage() {
+    return this.urlProvider.uploadImage();
+  }
+
+  public pathTempImage() {
+    return this.urlProvider.pathTempImage();
+  }
+
+  public categoryByName(objeto: any) {
+    return this.http.post(this.urlProvider.getCategoryByName(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public categoryLikeName(objeto: any) {
+    return this.http.post(this.urlProvider.getCategoryLikeName(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public categoryById(objeto: any) {
+    return this.http.post(this.urlProvider.getCategoryById(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public subcategoriesByCategory(objeto: any) {
+    return this.http.post(this.urlProvider.getSubcategoriesByCategories(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public subcategoriesById(objeto: any) {
+    return this.http.post(this.urlProvider.getSubcategoryById(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public tagById(objeto: any) {
+    return this.http.post(this.urlProvider.getTagById(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public statesByCountry(objeto: any) {
+    return this.http.post(this.urlProvider.getStatesByCountry(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public stateById(objeto: any) {
+    return this.http.post(this.urlProvider.getStateById(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public payRateById(objeto: any) {
+    return this.http.post(this.urlProvider.getPayRateById(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public employmentTypeById(objeto: any) {
+    return this.http.post(this.urlProvider.getEmploymentTypeById(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public cityById(objeto: any) {
+    return this.http.post(this.urlProvider.getCityById(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public cityByState(objeto: any) {
+    return this.http.post(this.urlProvider.getCityByState(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public insertCategory(objeto: any) {
+    return this.http.post(this.urlProvider.insertCategory(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public insertSubcategory(objeto: any) {
+    return this.http.post(this.urlProvider.insertSubcategory(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public insertTag(objeto: any) {
+    return this.http.post(this.urlProvider.insertTag(), JSON.stringify(objeto), this.httpOptions);
   }
 
 }

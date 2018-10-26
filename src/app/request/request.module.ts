@@ -24,7 +24,10 @@ import {
   DxTextAreaModule,
   DxDateBoxModule,
   DxFormModule,
-  DxAutocompleteModule
+  DxAutocompleteModule,
+  DxTooltipModule,
+  DxTemplateModule,
+  DxFileUploaderModule
 } from 'devextreme-angular';
 
 @NgModule({
@@ -44,7 +47,10 @@ import {
     DxTextAreaModule,
     DxDateBoxModule,
     DxFormModule,
-    DxAutocompleteModule
+    DxAutocompleteModule,
+    DxTooltipModule,
+    DxTemplateModule,
+    DxFileUploaderModule
   ],
   declarations: [
     NewRequestComponent,

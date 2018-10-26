@@ -16,3 +16,15 @@ dx-button {
 ::ng-deep .dx-button .dx-icon {
     color: #fff;
 }
+
+::ng-deep .form-avatar img {
+    width: 100%;
+    margin-right: 10px;
+    border: 1px solid #d2d3d5;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+::ng-deep .dx-fileuploader-file {
+    display: none;
+}
