@@ -61,6 +61,10 @@ export class  RequestProvider {
     return this.http.get(this.urlProvider.getAllRequest());
   }
 
+  public avartarRequestDir() {
+    return this.urlProvider.avartarRequestDir();
+  }
+
   public categoryByName(objeto: any) {
     return this.http.post(this.urlProvider.getCategoryByName(), JSON.stringify(objeto), this.httpOptions);
   }
