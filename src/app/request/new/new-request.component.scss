@@ -28,3 +28,7 @@ dx-button {
 ::ng-deep .dx-fileuploader-file {
     display: none;
 }
+
+label span.required {
+    color: red;
+}

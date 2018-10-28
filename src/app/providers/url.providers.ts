@@ -147,5 +147,53 @@ export class ULRProvider {
   public pathTempImage() {
     return this.dominio + 'documentos/temp/';
   }
-  /* UPLOAD */
+
+  public moveImageRequest() {
+    return this.dominio + 'upload/moveImageRequest.php';
+  }
+  /* END UPLOAD */
+
+  /* REQUEST */
+  public getAllRequest() {
+    return this.dominio + 'request/getAll.php';
+  }
+
+  public getRequestByFilters() {
+    return this.dominio + 'request/getByFilters.php';
+  }
+
+  public getRequestById() {
+    return this.dominio + 'request/getById.php';
+  }
+
+  public getRequestByUser() {
+    return this.dominio + 'request/getByUser.php';
+  }
+
+  public getRequestsRandom() {
+    return this.dominio + 'request/getRandom.php';
+  }
+
+  public insertRequest() {
+    return this.dominio + 'request/insert.php';
+  }
+
+  public updateRequest() {
+    return this.dominio + 'request/update.php';
+  }
+  /* END REQUEST */
+
+  /* DETREQUEST */
+  public getRequestsByTags() {
+    return this.dominio + 'detRequestTags/getRequestByTags.php';
+  }
+
+  public insertDetRequestTags() {
+    return this.dominio + 'detRequestTags/insert.php';
+  }
+
+  public deleteDetRequestTags() {
+    return this.dominio + 'detRequestTags/delete.php';
+  }
+  /* END DETREQUEST */
 }

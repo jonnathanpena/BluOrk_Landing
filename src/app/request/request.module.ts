@@ -11,6 +11,7 @@ import { EditRequestComponent } from './edit/edit-request.component';
 import { ULRProvider } from '../providers/url.providers';
 import { RequestProvider } from './request.providers';
 
+
 import {
   DxTextBoxModule,
   DxValidatorModule,
@@ -27,7 +28,8 @@ import {
   DxAutocompleteModule,
   DxTooltipModule,
   DxTemplateModule,
-  DxFileUploaderModule
+  DxFileUploaderModule,
+  DxLookupModule
 } from 'devextreme-angular';
 
 @NgModule({
@@ -50,7 +52,8 @@ import {
     DxAutocompleteModule,
     DxTooltipModule,
     DxTemplateModule,
-    DxFileUploaderModule
+    DxFileUploaderModule,
+    DxLookupModule
   ],
   declarations: [
     NewRequestComponent,

@@ -57,6 +57,10 @@ export class  RequestProvider {
     return this.urlProvider.pathTempImage();
   }
 
+  public allRequests() {
+    return this.http.get(this.urlProvider.getAllRequest());
+  }
+
   public categoryByName(objeto: any) {
     return this.http.post(this.urlProvider.getCategoryByName(), JSON.stringify(objeto), this.httpOptions);
   }
@@ -105,6 +109,26 @@ export class  RequestProvider {
     return this.http.post(this.urlProvider.getCityByState(), JSON.stringify(objeto), this.httpOptions);
   }
 
+  public requestsByFilters(objeto: any) {
+    return this.http.post(this.urlProvider.getRequestByFilters(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public requestById(objeto: any) {
+    return this.http.post(this.urlProvider.getRequestById(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public requestsByUser(objeto: any) {
+    return this.http.post(this.urlProvider.getRequestByUser(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public RequestsRandom(objeto: any) {
+    return this.http.post(this.urlProvider.getRequestsRandom(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public requestsByTags(objeto: any) {
+    return this.http.post(this.urlProvider.getRequestsByTags(), JSON.stringify(objeto), this.httpOptions);
+  }
+
   public insertCategory(objeto: any) {
     return this.http.post(this.urlProvider.insertCategory(), JSON.stringify(objeto), this.httpOptions);
   }
@@ -115,6 +139,26 @@ export class  RequestProvider {
 
   public insertTag(objeto: any) {
     return this.http.post(this.urlProvider.insertTag(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public insertRequest(objeto: any) {
+    return this.http.post(this.urlProvider.insertRequest(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public insertRequestTags(objeto: any) {
+    return this.http.post(this.urlProvider.insertDetRequestTags(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public moveImageRequest(objeto: any) {
+    return this.http.post(this.urlProvider.moveImageRequest(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public updateRequest(objeto: any) {
+    return this.http.post(this.urlProvider.updateRequest(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public deleteRequestTags(objeto: any) {
+    return this.http.post(this.urlProvider.deleteDetRequestTags(), JSON.stringify(objeto), this.httpOptions);
   }
 
 }

@@ -56,7 +56,7 @@
 
     <!-- Intro -->
     <section class="site-section site-section-light site-section-top themed-background-dark">
-        <dx-map [zoom]="11" [height]="440" width="100%" [controls]="true" [markerIconSrc]="mapMarkerUrl" [markers]="markers"></dx-map>
+      <dx-map [zoom]="11" [height]="440" width="100%" [controls]="true" [markerIconSrc]="mapMarkerUrl" [markers]="markers"></dx-map>
     </section>
     <!-- END Intro -->
 
@@ -65,7 +65,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-xs-12 col-md-8 col-md-offset-2">
-                    <form id="form-contact">
+                    <form id="form-contact" (submit)="guardar($event)">
                         <div class="col-sm-12 col-xs-12 col-md-4">
                           <div class="form-avatar">
                             <img id="imagen" [src]="avatar" (mouseenter)="toggleDefault()" (mouseleave)="toggleDefault()" >
@@ -82,58 +82,78 @@
                         </div>
                         <div class="col-sm-12 col-xs-12 col-md-8">
                             <div class="form-group">
-                                <label>Seacrh Category</label>
-                                <dx-select-box [items]="categorias" displayExpr="name_cat" valueExpr="id_cat" [searchEnabled]="true" placeholder="Search Category..." (onValueChanged)="cambioCategoria($event)"></dx-select-box>
+                                <label>Seacrh Category <span class="required">*</span></label>
+                                <dx-select-box #selectBoxCategoria [items]="categorias" displayExpr="name_cat" valueExpr="id_cat" [searchEnabled]="true" placeholder="Search Category..." (onValueChanged)="cambioCategoria($event)">
+                                  <dx-validator>
+                                    <dxi-validation-rule type="required" message=""></dxi-validation-rule>
+                                  </dx-validator>
+                                </dx-select-box>
                             </div>
                             <div class="form-group">
-                                <label>Seacrh Subcategory</label>
-                                <dx-select-box [items]="subcategorias" displayExpr="name_subcat" valueExpr="id_detsubcat" [searchEnabled]="true" placeholder="Search subcategory..." ></dx-select-box>
+                                <label>Seacrh Subcategory <span class="required">*</span></label>
+                                <dx-select-box #selectBoxSubCategoria [items]="subcategorias" displayExpr="name_subcat" valueExpr="id_detsubcat" [searchEnabled]="true" placeholder="Search subcategory..." (onValueChanged)="cambioSubcategoria($event)">
+                                  <dx-validator>
+                                    <dxi-validation-rule type="required" message=""></dxi-validation-rule>
+                                  </dx-validator>
+                                </dx-select-box>
                             </div>
                             <div class="form-group">
                                 <label>Select Tags</label>
-                                <dx-tag-box [items]="tags" displayExpr="name_tags" valueExpr="id_tags" [searchEnabled]="true" placeholders="Select Skills..."></dx-tag-box>
+                                <dx-tag-box [items]="tags" #tagsBox displayExpr="name_tags" valueExpr="id_tags" [searchEnabled]="true" placeholders="Select Skills..." (onValueChanged)="cambioTags($event)"></dx-tag-box>
                             </div>
                         </div>
                         <div class="col-sm-12 col-xs-12 col-md-12">
                             <div class="form-group">
-                                <label>Title</label>
-                                <dx-text-box class="form-control input-lg" style="margin-bottom: 10px; width: 100%;" placeholder="Title">
+                                <label>Title <span class="required">*</span></label>
+                                <dx-text-box class="form-control input-lg" style="margin-bottom: 10px; width: 100%;" placeholder="Title" [(value)]="request.title_req">
                                     <dx-validator>
                                         <dxi-validation-rule type="required" message=""></dxi-validation-rule>
                                     </dx-validator>
                                 </dx-text-box>
                             </div>
                             <div class="form-group">
-                                <label>Description</label>
-                                <dx-text-area [height]="90" placeholder="Description" class="form-control" style="margin-bottom: 10px; width: 100%;">
+                                <label>Description <span class="required">*</span></label>
+                                <dx-text-area [height]="90" placeholder="Description" class="form-control" style="margin-bottom: 10px; width: 100%;" [(value)]="request.description_req">
                                     <dx-validator>
                                         <dxi-validation-rule type="required" message=""></dxi-validation-rule>
                                     </dx-validator>
                                 </dx-text-area>
                             </div>
                             <div class="form-group">
-                                <label>Search State</label>
-                                <dx-select-box [items]="estados" displayExpr="name_states" valueExpr="id_states" [searchEnabled]="true" placeholder="Search State..." (onValueChanged)="cambioEstado($event)"></dx-select-box>
+                                <label>Search State <span class="required">*</span></label>
+                                <dx-select-box #selectBoxEstados [items]="estados" displayExpr="name_states" valueExpr="id_states" [searchEnabled]="true" placeholder="Search State..." (onValueChanged)="cambioEstado($event)">
+                                  <dx-validator>
+                                        <dxi-validation-rule type="required" message=""></dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-select-box>
                             </div>
                             <div class="form-group">
-                                <label>Search City</label>
-                                <dx-select-box [items]="ciudades" displayExpr="name_cities" valueExpr="id_cities" [searchEnabled]="true" placeholder="Search City..."></dx-select-box>
+                                <label>Search City <span class="required">*</span></label>
+                                <dx-select-box #selectBoxCiudades [items]="ciudades" displayExpr="name_cities" valueExpr="id_cities" [searchEnabled]="true" placeholder="Search City..." (onValueChanged)="cambioCiudad($event)">
+                                  <dx-validator>
+                                    <dxi-validation-rule type="required" message=""></dxi-validation-rule>
+                                  </dx-validator>
+                                </dx-select-box>
                             </div>
                             <div class="form-group">
-                                <label>Zipcode</label>
-                                <dx-text-box class="form-control input-lg" style="margin-bottom: 10px; width: 100%;" placeholder="Zipcode">
+                                <label>Zipcode <span class="required">*</span></label>
+                                <dx-text-box class="form-control input-lg" style="margin-bottom: 10px; width: 100%;" placeholder="Zipcode" [(value)]="request.zipcode_req">
                                     <dx-validator>
                                         <dxi-validation-rule type="required" message=""></dxi-validation-rule>
                                     </dx-validator>
                                 </dx-text-box>
                             </div>
                             <div class="form-group">
-                                <label>Address</label>
-                                <dx-autocomplete style="margin-bottom: 10px;" placeholder="Type Address" [(value)]="request.direccion" [dataSource]="address" (onValueChanged)="updateAddress($event)"></dx-autocomplete>
+                                <label>Address <span class="required">*</span></label>
+                                <dx-autocomplete style="margin-bottom: 10px;" placeholder="Type Address" [(value)]="request.address_req" [dataSource]="address" (onValueChanged)="updateAddress($event)">
+                                  <dx-validator>
+                                    <dxi-validation-rule type="required" message=""></dxi-validation-rule>
+                                  </dx-validator>
+                                </dx-autocomplete>
                             </div>
                             <div class="form-group">
-                                <label>Pay Amount</label>
-                                <dx-text-box mode="number" class="form-control input-lg" style="margin-bottom: 10px; width: 100%;" placeholder="Compensation">
+                                <label>Pay Amount <span class="required">*</span></label>
+                                <dx-text-box mode="number" class="form-control input-lg" style="margin-bottom: 10px; width: 100%;" placeholder="Compensation" [(value)]="request.payAmount_req">
                                     <dx-validator>
                                         <dxi-validation-rule type="required" message=""></dxi-validation-rule>
                                     </dx-validator>
@@ -142,7 +162,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <dx-button class="btn btn-lg btn-primary" icon="check" [useSubmitBehavior]="true" [disabled]="guardando" text="Save"></dx-button>
-                            <dx-button class="btn btn-lg btn-danger" icon="remove" [disabled]="guardando" text="Cancel"></dx-button>
+                            <dx-button class="btn btn-lg btn-danger" icon="remove" [disabled]="guardando" text="Cancel" (click)="cancelar()"></dx-button>
                         </div>
                     </form>
                 </div>
