@@ -1,0 +1,286 @@
+<div id="page-container">
+    <!-- Site Header -->
+    <header>
+        <div class="container">
+            <!-- Site Logo -->
+            <a href="#" class="site-logo">
+                <strong>Blu</strong>Ork
+            </a>
+            <!-- Site Logo -->
+
+            <!-- Site Navigation -->
+            <nav>
+                <!-- Menu Toggle -->
+                <!-- Toggles menu on small screens -->
+                <a href="javascript:void(0)" class="btn btn-default site-menu-toggle visible-xs visible-sm">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <!-- END Menu Toggle -->
+
+                <!-- Main Menu -->
+                <ul class="site-nav">
+                    <!-- Toggles menu on small screens -->
+                    <li class="visible-xs visible-sm">
+                        <a href="javascript:void(0)" class="site-menu-toggle text-center">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </li>
+                    <!-- END Menu Toggle -->
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a routerLink="/request" class="site-nav-sub"><i class="fa fa-angle-down site-nav-arrow"></i>Jobs</a>
+                        <ul>
+                            <li>
+                                <a routerLink="/request/new">New</a>
+                            </li>
+                            <li>
+                                <a href="/request">Search</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a routerLink="/login" class="btn btn-primary">Log In</a>
+                    </li>
+                    <li>
+                        <a routerLink="/signup" class="btn btn-success">Sign Up</a>
+                    </li>
+                </ul>
+                <!-- END Main Menu -->
+            </nav>
+            <!-- END Site Navigation -->
+        </div>
+    </header>
+    <!-- END Site Header -->
+
+    <!-- Intro -->
+    <section class="site-section site-section-light site-section-top themed-background-dark">
+        <div class="container text-center">
+            <h1 class="animation-slideDown"><strong>Search Results</strong></h1>
+            <h2 class="h3 animation-slideUp"><strong>XXX</strong> request found</h2>
+        </div>
+    </section>
+    <!-- END Intro -->
+
+    <!-- Search Results -->
+    <section class="site-content site-section">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-md-4 col-lg-3">
+                    <aside class="sidebar site-block">
+                        <!-- Refine Search -->
+                        <div class="sidebar-block">
+                            <form class="form-horizontal">
+                                <div class="form-group push-bit">
+                                    <div class="col-xs-12">
+                                        <div class="input-group">
+                                            <input type="text" id="ecom-search" name="ecom-search" class="form-control" placeholder="Search Request..." value="Home">
+                                            <div class="input-group-btn">
+                                                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h4><strong>Price Range</strong></h4>
+                                <div class="form-group push-bit">
+                                    <div class="col-xs-12">
+                                        <dx-range-selector id="range-selector" [value]="[40000, 80000]">
+                                            <dxo-margin [top]="50"></dxo-margin>
+                                            <dxo-size [height]="210"></dxo-size>
+                                            <dxo-scale [startValue]="15000" [endValue]="150000" [minorTickInterval]="500" [tickInterval]="15000">
+                                                <dxo-label format="currency"></dxo-label>
+                                                <dxo-minor-tick [visible]="false"></dxo-minor-tick>
+                                            </dxo-scale>
+                                            <dxo-slider-marker format="currency"></dxo-slider-marker>
+                                        </dx-range-selector>
+                                    </div>
+                                </div>
+                                <h4><strong>Filters</strong></h4>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <dx-select-box [items]="categorias" displayExpr="name" valueExpr="id" [searchEnabled]="true" placeholder="Search Category..."></dx-select-box>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <dx-select-box [items]="subcategorias" displayExpr="name" valueExpr="id" [searchEnabled]="true" placeholder="Search subcategory..."></dx-select-box>
+                                    </div>
+                                </div>
+                                <div class="form-group push-bit">
+                                    <div class="col-sm-12">
+                                        <dx-tag-box [items]="tags" displayExpr="name" valueExpr="id" [searchEnabled]="true"></dx-tag-box>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- END Refine Search -->
+                    </aside>
+                </div>
+                <!-- END Sidebar -->
+
+                <!-- Requests -->
+                <div class="col-md-8 col-lg-9">
+                    <div class="form-inline push-bit clearfix">
+                        <select id="results-show" name="results-show" class="form-control pull-right" size="1">
+                          <option value="0" disabled selected>SHOW</option>
+                          <option value="25">25</option>
+                          <option value="50">50</option>
+                          <option value="75">75</option>
+                          <option value="100">100</option>
+                      </select>
+                        <select id="results-sort" name="results-sort" class="form-control" size="1">
+                          <option value="0" disabled selected>SORT BY</option>
+                          <option value="1">Popularity</option>
+                          <option value="2">Name (A to Z)</option>
+                          <option value="3">Name (Z to A)</option>
+                          <option value="4">Price (Lowest to Highest)</option>
+                          <option value="5">Price (Highest to Lowest)</option>
+                          <option value="6">Sales (Lowest to Highest)</option>
+                          <option value="7">Sales (Highest to Lowest)</option>
+                      </select>
+                    </div>
+                    <div class="row store-items">
+                        <div class="col-md-6" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
+                            <div class="store-item">
+                                <div class="store-item-image">
+                                    <a href="#">
+                                        <img src="assets/img/placeholders/photos/electricidad.png" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="store-item-info clearfix">
+                                    <span class="store-item-price themed-color-dark pull-right">$ 12/h</span>
+                                    <a href="#"><strong>Electrical technician</strong></a><br>
+                                    <small><i class="fa fa-search text-muted"></i> <a href="#" class="text-muted">Show</a></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
+                            <div class="store-item">
+                                <div class="store-item-image">
+                                    <a href="#">
+                                        <img src="assets/img/placeholders/photos/carpinteria.png" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="store-item-info clearfix">
+                                    <span class="store-item-price themed-color-dark pull-right">$ 12/h</span>
+                                    <a href="#"><strong>Carpenter</strong></a><br>
+                                    <small><i class="fa fa-search text-muted"></i> <a href="#" class="text-muted">Show</a></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
+                            <div class="store-item">
+                                <div class="store-item-image">
+                                    <a href="#">
+                                        <img src="assets/img/placeholders/photos/mecanica.png" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="store-item-info clearfix">
+                                    <span class="store-item-price themed-color-dark pull-right">$ 12/h</span>
+                                    <a href="#"><strong>Mechanic</strong></a><br>
+                                    <small><i class="fa fa-search text-muted"></i> <a href="#" class="text-muted">Show</a></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
+                            <div class="store-item">
+                                <div class="store-item-image">
+                                    <a href="#">
+                                        <img src="assets/img/placeholders/photos/plomero.png" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="store-item-info clearfix">
+                                    <span class="store-item-price themed-color-dark pull-right">$ 12/h</span>
+                                    <a href="#"><strong>Plumber</strong></a><br>
+                                    <small><i class="fa fa-search text-muted"></i> <a href="#" class="text-muted">Show</a></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
+                            <div class="store-item">
+                                <div class="store-item-image">
+                                    <a href="#">
+                                        <img src="assets/img/placeholders/photos/mapa1.png" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="store-item-info clearfix">
+                                    <span class="store-item-price themed-color-dark pull-right">$ 12/h</span>
+                                    <a href="#"><strong>Other</strong></a><br>
+                                    <small><i class="fa fa-search text-muted"></i> <a href="#" class="text-muted">Show</a></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
+                            <div class="store-item">
+                                <div class="store-item-image">
+                                    <a href="#">
+                                        <img src="assets/img/placeholders/photos/mapa2.png" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="store-item-info clearfix">
+                                    <span class="store-item-price themed-color-dark pull-right">$ 12/h</span>
+                                    <a href="#"><strong>Other</strong></a><br>
+                                    <small><i class="fa fa-search text-muted"></i> <a href="#" class="text-muted">Show</a></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 text-right">
+                            <ul class="pagination">
+                                <li class="disabled"><a href="javascript:void(0)"><i class="fa fa-arrow-left"></i></a></li>
+                                <li class="active"><a href="javascript:void(0)">1</a></li>
+                                <li><a href="javascript:void(0)">2</a></li>
+                                <li><a href="javascript:void(0)">3</a></li>
+                                <li><a href="javascript:void(0)">4</a></li>
+                                <li><a href="javascript:void(0)"><i class="fa fa-arrow-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Requests -->
+            </div>
+        </div>
+    </section>
+    <!-- END Search Results -->
+
+    <!-- Footer -->
+    <footer class="site-footer site-section">
+        <div class="container">
+            <!-- Footer Links -->
+            <div class="row">
+                <div class="col-sm-6 col-md-3">
+                    <h4 class="footer-heading">About Us</h4>
+                    <ul class="footer-nav list-inline">
+                        <li><a href="#">Company</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-nav list-inline">
+                        <li><a href="#">Licensing</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <h4 class="footer-heading">Follow Us</h4>
+                    <ul class="footer-nav footer-nav-social list-inline">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <h4 class="footer-heading">2018 &copy; <a href="#">BluOrk</a></h4>
+                </div>
+            </div>
+            <!-- END Footer Links -->
+        </div>
+    </footer>
+    <!-- END Footer -->
+</div>
+<!-- END Page Container -->
