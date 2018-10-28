@@ -86,20 +86,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <h4><strong>Price Range</strong></h4>
-                                <div class="form-group push-bit">
-                                    <div class="col-xs-12">
-                                        <dx-range-selector id="range-selector" [value]="rango" (onValueChanged)="cambioRango($event)">
-                                            <dxo-margin [top]="50"></dxo-margin>
-                                            <dxo-size [height]="210"></dxo-size>
-                                            <dxo-scale [startValue]="0" [endValue]="200" [minorTickInterval]="0" [tickInterval]="5">
-                                                <dxo-label format="currency"></dxo-label>
-                                                <dxo-minor-tick [visible]="false"></dxo-minor-tick>
-                                            </dxo-scale>
-                                            <dxo-slider-marker format="currency"></dxo-slider-marker>
-                                        </dx-range-selector>
-                                    </div>
-                                </div>
                                 <h4><strong>Filters</strong></h4>
                                 <div class="form-group">
                                     <div class="col-sm-12">
@@ -108,7 +94,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <dx-select-box [items]="subcategorias" displayExpr="name_subcat" valueExpr="subcategory_id" [searchEnabled]="true" placeholder="Search subcategory..." (onValueChanged)="cambioSubcategoria($event)"></dx-select-box>
+                                        <dx-select-box [items]="subcategorias" displayExpr="name_subcat" valueExpr="id_detsubcat" [searchEnabled]="true" placeholder="Search subcategory..." (onValueChanged)="cambioSubcategoria($event)"></dx-select-box>
                                     </div>
                                 </div>
                                 <div class="form-group push-bit">
@@ -129,14 +115,14 @@
                         <div class="col-md-6" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100" *ngFor="let job of jobs">
                             <div class="store-item">
                                 <div class="store-item-image">
-                                    <a href="#">
+                                    <a style="cursor: pointer;" (click)="detallar(job.id_req)">
                                         <img [src]="job.avatar_req" class="img-responsive">
                                     </a>
                                 </div>
                                 <div class="store-item-info clearfix">
                                     <span class="store-item-price themed-color-dark pull-right">$ {{job.payAmount_req}}/h</span>
-                                    <a href="#"><strong>{{job.title_req}}</strong></a><br>
-                                    <small><i class="fa fa-search text-muted"></i> <a href="#" class="text-muted">Show</a></small>
+                                    <a (click)="detallar(job.id_req)" style="cursor: pointer;"><strong>{{job.title_req}}</strong></a><br>
+                                    <small><i class="fa fa-search text-muted"></i> <a style="cursor: pointer;" (click)="detallar(job.id_req)" class="text-muted">Show</a></small>
                                 </div>
                             </div>
                         </div>

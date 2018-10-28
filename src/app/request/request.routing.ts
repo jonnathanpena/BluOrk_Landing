@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { NewRequestComponent } from './new/new-request.component';
 import { SearchRequestComponent } from './search/search-request.component';
 import { EditRequestComponent } from './edit/edit-request.component';
+import { MyRequestsComponent } from './my/my-requests.component';
 
 export const RequestRoutes: Routes = [
   {
@@ -19,6 +20,10 @@ export const RequestRoutes: Routes = [
       {
         path: 'edit',
         component: EditRequestComponent
+      },
+      {
+        path: 'my',
+        component: MyRequestsComponent
       }
     ]
   }
