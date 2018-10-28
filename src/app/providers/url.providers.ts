@@ -151,6 +151,10 @@ export class ULRProvider {
   public moveImageRequest() {
     return this.dominio + 'upload/moveImageRequest.php';
   }
+
+  public avartarRequestDir() {
+    return this.dominio + 'documentos/imagenes/request/';
+  }
   /* END UPLOAD */
 
   /* REQUEST */

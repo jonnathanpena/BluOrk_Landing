@@ -3,7 +3,7 @@
     <header>
         <div class="container">
             <!-- Site Logo -->
-            <a href="#" class="site-logo">
+            <a href="/login" class="site-logo">
                 <strong>Blu</strong>Ork
             </a>
             <!-- Site Logo -->
@@ -41,6 +41,9 @@
                         </ul>
                     </li>
                     <li>
+                        <a routerLink="/request" class="site-nav-sub">Jobs</a>
+                    </li>
+                    <li>
                         <a routerLink="/login" class="btn btn-primary">Log In</a>
                     </li>
                     <li>
@@ -58,7 +61,7 @@
     <section class="site-section site-section-light site-section-top themed-background-dark">
         <div class="container text-center">
             <h1 class="animation-slideDown"><strong>Search Results</strong></h1>
-            <h2 class="h3 animation-slideUp"><strong>XXX</strong> request found</h2>
+            <h2 class="h3 animation-slideUp"><strong>{{jobs.length}}</strong> request found</h2>
         </div>
     </section>
     <!-- END Intro -->
@@ -76,7 +79,7 @@
                                 <div class="form-group push-bit">
                                     <div class="col-xs-12">
                                         <div class="input-group">
-                                            <input type="text" id="ecom-search" name="ecom-search" class="form-control" placeholder="Search Request..." value="Home">
+                                            <input type="text" id="ecom-search" name="ecom-search" class="form-control" placeholder="Search Request..." (keyup)="onKey($event)" #search>
                                             <div class="input-group-btn">
                                                 <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                                             </div>
@@ -86,10 +89,10 @@
                                 <h4><strong>Price Range</strong></h4>
                                 <div class="form-group push-bit">
                                     <div class="col-xs-12">
-                                        <dx-range-selector id="range-selector" [value]="[40000, 80000]">
+                                        <dx-range-selector id="range-selector" [value]="rango" (onValueChanged)="cambioRango($event)">
                                             <dxo-margin [top]="50"></dxo-margin>
                                             <dxo-size [height]="210"></dxo-size>
-                                            <dxo-scale [startValue]="15000" [endValue]="150000" [minorTickInterval]="500" [tickInterval]="15000">
+                                            <dxo-scale [startValue]="0" [endValue]="200" [minorTickInterval]="0" [tickInterval]="5">
                                                 <dxo-label format="currency"></dxo-label>
                                                 <dxo-minor-tick [visible]="false"></dxo-minor-tick>
                                             </dxo-scale>
@@ -100,17 +103,17 @@
                                 <h4><strong>Filters</strong></h4>
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <dx-select-box [items]="categorias" displayExpr="name" valueExpr="id" [searchEnabled]="true" placeholder="Search Category..."></dx-select-box>
+                                        <dx-select-box [items]="categorias" displayExpr="name_cat" valueExpr="id_cat" [searchEnabled]="true" placeholder="Search Category..." (onValueChanged)="cambioCategoria($event)"></dx-select-box>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <dx-select-box [items]="subcategorias" displayExpr="name" valueExpr="id" [searchEnabled]="true" placeholder="Search subcategory..."></dx-select-box>
+                                        <dx-select-box [items]="subcategorias" displayExpr="name_subcat" valueExpr="subcategory_id" [searchEnabled]="true" placeholder="Search subcategory..." (onValueChanged)="cambioSubcategoria($event)"></dx-select-box>
                                     </div>
                                 </div>
                                 <div class="form-group push-bit">
                                     <div class="col-sm-12">
-                                        <dx-tag-box [items]="tags" displayExpr="name" valueExpr="id" [searchEnabled]="true"></dx-tag-box>
+                                        <dx-tag-box [items]="tags" displayExpr="name_tags" valueExpr="id_tags" [searchEnabled]="true" (onValueChanged)="escogeTags($event)"></dx-tag-box>
                                     </div>
                                 </div>
                             </form>
@@ -122,111 +125,22 @@
 
                 <!-- Requests -->
                 <div class="col-md-8 col-lg-9">
-                    <div class="form-inline push-bit clearfix">
-                        <select id="results-show" name="results-show" class="form-control pull-right" size="1">
-                          <option value="0" disabled selected>SHOW</option>
-                          <option value="25">25</option>
-                          <option value="50">50</option>
-                          <option value="75">75</option>
-                          <option value="100">100</option>
-                      </select>
-                        <select id="results-sort" name="results-sort" class="form-control" size="1">
-                          <option value="0" disabled selected>SORT BY</option>
-                          <option value="1">Popularity</option>
-                          <option value="2">Name (A to Z)</option>
-                          <option value="3">Name (Z to A)</option>
-                          <option value="4">Price (Lowest to Highest)</option>
-                          <option value="5">Price (Highest to Lowest)</option>
-                          <option value="6">Sales (Lowest to Highest)</option>
-                          <option value="7">Sales (Highest to Lowest)</option>
-                      </select>
-                    </div>
                     <div class="row store-items">
-                        <div class="col-md-6" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
+                        <div class="col-md-6" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100" *ngFor="let job of jobs">
                             <div class="store-item">
                                 <div class="store-item-image">
                                     <a href="#">
-                                        <img src="assets/img/placeholders/photos/electricidad.png" alt="" class="img-responsive">
+                                        <img [src]="job.avatar_req" class="img-responsive">
                                     </a>
                                 </div>
                                 <div class="store-item-info clearfix">
-                                    <span class="store-item-price themed-color-dark pull-right">$ 12/h</span>
-                                    <a href="#"><strong>Electrical technician</strong></a><br>
+                                    <span class="store-item-price themed-color-dark pull-right">$ {{job.payAmount_req}}/h</span>
+                                    <a href="#"><strong>{{job.title_req}}</strong></a><br>
                                     <small><i class="fa fa-search text-muted"></i> <a href="#" class="text-muted">Show</a></small>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
-                            <div class="store-item">
-                                <div class="store-item-image">
-                                    <a href="#">
-                                        <img src="assets/img/placeholders/photos/carpinteria.png" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                                <div class="store-item-info clearfix">
-                                    <span class="store-item-price themed-color-dark pull-right">$ 12/h</span>
-                                    <a href="#"><strong>Carpenter</strong></a><br>
-                                    <small><i class="fa fa-search text-muted"></i> <a href="#" class="text-muted">Show</a></small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
-                            <div class="store-item">
-                                <div class="store-item-image">
-                                    <a href="#">
-                                        <img src="assets/img/placeholders/photos/mecanica.png" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                                <div class="store-item-info clearfix">
-                                    <span class="store-item-price themed-color-dark pull-right">$ 12/h</span>
-                                    <a href="#"><strong>Mechanic</strong></a><br>
-                                    <small><i class="fa fa-search text-muted"></i> <a href="#" class="text-muted">Show</a></small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
-                            <div class="store-item">
-                                <div class="store-item-image">
-                                    <a href="#">
-                                        <img src="assets/img/placeholders/photos/plomero.png" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                                <div class="store-item-info clearfix">
-                                    <span class="store-item-price themed-color-dark pull-right">$ 12/h</span>
-                                    <a href="#"><strong>Plumber</strong></a><br>
-                                    <small><i class="fa fa-search text-muted"></i> <a href="#" class="text-muted">Show</a></small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
-                            <div class="store-item">
-                                <div class="store-item-image">
-                                    <a href="#">
-                                        <img src="assets/img/placeholders/photos/mapa1.png" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                                <div class="store-item-info clearfix">
-                                    <span class="store-item-price themed-color-dark pull-right">$ 12/h</span>
-                                    <a href="#"><strong>Other</strong></a><br>
-                                    <small><i class="fa fa-search text-muted"></i> <a href="#" class="text-muted">Show</a></small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6" data-toggle="animation-appear" data-animation-class="animation-fadeInQuick" data-element-offset="-100">
-                            <div class="store-item">
-                                <div class="store-item-image">
-                                    <a href="#">
-                                        <img src="assets/img/placeholders/photos/mapa2.png" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                                <div class="store-item-info clearfix">
-                                    <span class="store-item-price themed-color-dark pull-right">$ 12/h</span>
-                                    <a href="#"><strong>Other</strong></a><br>
-                                    <small><i class="fa fa-search text-muted"></i> <a href="#" class="text-muted">Show</a></small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 text-right">
+                        <!--<div class="col-xs-12 text-right">
                             <ul class="pagination">
                                 <li class="disabled"><a href="javascript:void(0)"><i class="fa fa-arrow-left"></i></a></li>
                                 <li class="active"><a href="javascript:void(0)">1</a></li>
@@ -235,7 +149,7 @@
                                 <li><a href="javascript:void(0)">4</a></li>
                                 <li><a href="javascript:void(0)"><i class="fa fa-arrow-right"></i></a></li>
                             </ul>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <!-- END Requests -->
