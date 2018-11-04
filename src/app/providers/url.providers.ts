@@ -200,4 +200,10 @@ export class ULRProvider {
     return this.dominio + 'detRequestTags/delete.php';
   }
   /* END DETREQUEST */
+
+  /* DETSUBCAT */
+  public getDetSubcatById() {
+    return this.dominio + 'detsubcat/getById.php';
+  }
+  /* DETSUBCAT */
 }

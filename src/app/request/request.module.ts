@@ -7,6 +7,7 @@ import { RequestRoutes } from './request.routing';
 import { NewRequestComponent } from './new/new-request.component';
 import { SearchRequestComponent } from './search/search-request.component';
 import { EditRequestComponent } from './edit/edit-request.component';
+import { MyRequestsComponent } from './my/my-requests.component';
 
 import { ULRProvider } from '../providers/url.providers';
 import { RequestProvider } from './request.providers';
@@ -58,7 +59,8 @@ import {
   declarations: [
     NewRequestComponent,
     SearchRequestComponent,
-    EditRequestComponent
+    EditRequestComponent,
+    MyRequestsComponent
   ],
   providers: [
     ULRProvider,
