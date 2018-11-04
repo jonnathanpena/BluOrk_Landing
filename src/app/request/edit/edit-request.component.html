@@ -86,7 +86,7 @@
                         <div class="col-sm-12 col-xs-12 col-md-8">
                             <div class="form-group">
                                 <label>Seacrh Category <span class="required">*</span></label>
-                                <dx-select-box #selectBoxCategoria [items]="categorias" displayExpr="name_cat" valueExpr="id_cat" [searchEnabled]="true" placeholder="Search Category..." (onValueChanged)="cambioCategoria($event)">
+                                <dx-select-box #selectBoxCategoria [items]="categorias" displayExpr="name_cat" valueExpr="id_cat" [searchEnabled]="true" placeholder="Search Category..." (onValueChanged)="cambioCategoria($event)" [value]="categoria">
                                   <dx-validator>
                                     <dxi-validation-rule type="required" message=""></dxi-validation-rule>
                                   </dx-validator>
@@ -94,7 +94,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Seacrh Subcategory <span class="required">*</span></label>
-                                <dx-select-box #selectBoxSubCategoria [items]="subcategorias" displayExpr="name_subcat" valueExpr="id_detsubcat" [searchEnabled]="true" placeholder="Search subcategory..." (onValueChanged)="cambioSubcategoria($event)">
+                                <dx-select-box #selectBoxSubCategoria [items]="subcategorias" displayExpr="name_subcat" valueExpr="id_detsubcat" [searchEnabled]="true" placeholder="Search subcategory..." (onValueChanged)="cambioSubcategoria($event)" [value]="subcategoria">
                                   <dx-validator>
                                     <dxi-validation-rule type="required" message=""></dxi-validation-rule>
                                   </dx-validator>
@@ -124,7 +124,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Search State <span class="required">*</span></label>
-                                <dx-select-box #selectBoxEstados [items]="estados" displayExpr="name_states" valueExpr="id_states" [searchEnabled]="true" placeholder="Search State..." (onValueChanged)="cambioEstado($event)">
+                                <dx-select-box #selectBoxEstados [items]="estados" displayExpr="name_states" valueExpr="id_states" [searchEnabled]="true" placeholder="Search State..." (onValueChanged)="cambioEstado($event)" [value]="state">
                                   <dx-validator>
                                         <dxi-validation-rule type="required" message=""></dxi-validation-rule>
                                     </dx-validator>
@@ -132,7 +132,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Search City <span class="required">*</span></label>
-                                <dx-select-box #selectBoxCiudades [items]="ciudades" displayExpr="name_cities" valueExpr="id_cities" [searchEnabled]="true" placeholder="Search City..." (onValueChanged)="cambioCiudad($event)">
+                                <dx-select-box #selectBoxCiudades [items]="ciudades" displayExpr="name_cities" valueExpr="id_cities" [searchEnabled]="true" placeholder="Search City..." (onValueChanged)="cambioCiudad($event)" [value]="city">
                                   <dx-validator>
                                     <dxi-validation-rule type="required" message=""></dxi-validation-rule>
                                   </dx-validator>

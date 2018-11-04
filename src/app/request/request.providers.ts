@@ -133,6 +133,10 @@ export class  RequestProvider {
     return this.http.post(this.urlProvider.getRequestsByTags(), JSON.stringify(objeto), this.httpOptions);
   }
 
+  public detSubcatById(objeto: any) {
+    return this.http.post(this.urlProvider.getDetSubcatById(), JSON.stringify(objeto), this.httpOptions);
+  }
+
   public insertCategory(objeto: any) {
     return this.http.post(this.urlProvider.insertCategory(), JSON.stringify(objeto), this.httpOptions);
   }
