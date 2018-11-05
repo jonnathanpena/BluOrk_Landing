@@ -21,12 +21,24 @@ export class  SignUpProvider {
     return this.http.get(this.urlProvider.getAllUsers());
   }
 
+  public allTags() {
+    return this.http.get(this.urlProvider.getAllTags());
+  }
+
   public userByEmail(objeto: any) {
     return this.http.post(this.urlProvider.getUserByEmail(), JSON.stringify(objeto), this.httpOptions);
   }
 
   public userById(objeto: any) {
     return this.http.post(this.urlProvider.getUserById(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public statesByCountry(objeto: any) {
+    return this.http.post(this.urlProvider.getStatesByCountry(), JSON.stringify(objeto), this.httpOptions);
+  }
+
+  public cityByState(objeto: any) {
+    return this.http.post(this.urlProvider.getCityByState(), JSON.stringify(objeto), this.httpOptions);
   }
 
   public insertUser(objeto: any) {

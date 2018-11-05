@@ -13,7 +13,14 @@ import {
   DxTextBoxModule,
   DxValidatorModule,
   DxValidationSummaryModule,
-  DxButtonModule
+  DxButtonModule,
+  DxPopupModule,
+  DxTemplateModule,
+  DxSelectBoxModule,
+  DxTextAreaModule,
+  DxDateBoxModule,
+  DxFormModule,
+  DxTagBoxModule
 } from 'devextreme-angular';
 
 @NgModule({
@@ -24,7 +31,14 @@ import {
     DxTextBoxModule,
     DxValidatorModule,
     DxValidationSummaryModule,
-    DxButtonModule
+    DxButtonModule,
+    DxPopupModule,
+    DxTemplateModule,
+    DxSelectBoxModule,
+    DxTextAreaModule,
+    DxDateBoxModule,
+    DxFormModule,
+    DxTagBoxModule
   ],
   declarations: [
     SignUpComponent
