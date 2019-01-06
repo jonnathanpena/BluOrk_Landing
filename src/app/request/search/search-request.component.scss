@@ -1,3 +1,46 @@
 .store-item-image {
     height: 200px;
 }
+
+// PERFIL
+.navbar-login {
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session {
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size {
+    font-size: 87px;
+}
+
+.no-padding-right {
+    padding-right: 0;
+    p {
+        img {
+            width: 100%;
+        }
+    }
+}
+
+div {
+    .navbar-login {
+        .row {
+            p {
+                color: #000;
+                margin-bottom: 5px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .site-nav ul {
+        width: auto;
+    }
+}

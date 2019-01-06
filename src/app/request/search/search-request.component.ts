@@ -18,12 +18,20 @@ export class SearchRequestComponent implements OnInit {
   rango: any = [];
   modificado: boolean;
   searchInput: string;
+  usuarioLoggeado: any = {};
 
   constructor(
     private services: RequestProvider
   ) {}
 
   ngOnInit() {
+    const usuarioLoggeado = localStorage.getItem('bluork_usuarioLoggeado');
+    if (usuarioLoggeado) {
+      this.usuarioLoggeado = JSON.parse(usuarioLoggeado);
+      console.log(this.usuarioLoggeado);
+    } else {
+      console.log('No loggeado');
+    }
     this.services.allCategories().subscribe((response: Response) => {
       this.categorias = response['data'];
     });

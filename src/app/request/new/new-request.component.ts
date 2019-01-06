@@ -32,6 +32,7 @@ export class NewRequestComponent implements OnInit {
   image: any;
   url: string;
   tagsSeleccionados = [];
+  usuarioLoggeado: any = {};
 
   @ViewChild(DxSelectBoxComponent) selectBoxCategoria: DxSelectBoxComponent;
   @ViewChild(DxSelectBoxComponent) selectBoxSubCategoria: DxSelectBoxComponent;
@@ -44,6 +45,13 @@ export class NewRequestComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    const usuarioLoggeado = localStorage.getItem('bluork_usuarioLoggeado');
+    if (usuarioLoggeado) {
+      this.usuarioLoggeado = JSON.parse(usuarioLoggeado);
+      console.log(this.usuarioLoggeado);
+    } else {
+      console.log('No loggeado');
+    }
     this.markerUrl = 'https://js.devexpress.com/Demos/RealtorApp/images/map-marker.png';
     this.avatar = '../../../assets/img/placeholders/avatars/avatar1.jpg';
     this.defaultVisible = false;

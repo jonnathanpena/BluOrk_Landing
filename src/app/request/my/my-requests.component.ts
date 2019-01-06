@@ -17,6 +17,7 @@ export class MyRequestsComponent implements OnInit {
   tagsEscogidos: any = [];
   searchInput: string;
   subcategoria: number;
+  usuarioLoggeado: any = {};
 
   constructor(
     private services: RequestProvider,
@@ -24,6 +25,13 @@ export class MyRequestsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    const usuarioLoggeado = localStorage.getItem('bluork_usuarioLoggeado');
+    if (usuarioLoggeado) {
+      this.usuarioLoggeado = JSON.parse(usuarioLoggeado);
+      console.log(this.usuarioLoggeado);
+    } else {
+      console.log('No loggeado');
+    }
     this.services.allCategories().subscribe((response: Response) => {
       this.categorias = response['data'];
     });

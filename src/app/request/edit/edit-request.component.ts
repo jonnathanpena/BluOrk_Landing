@@ -39,6 +39,7 @@ export class EditRequestComponent implements OnInit {
   categoria: any;
   subcategoria: any;
   contador: number;
+  usuarioLoggeado: any = {};
 
   @ViewChild(DxSelectBoxComponent) selectBoxCategoria: DxSelectBoxComponent;
   @ViewChild(DxSelectBoxComponent) selectBoxSubCategoria: DxSelectBoxComponent;
@@ -52,6 +53,13 @@ export class EditRequestComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    const usuarioLoggeado = localStorage.getItem('bluork_usuarioLoggeado');
+    if (usuarioLoggeado) {
+      this.usuarioLoggeado = JSON.parse(usuarioLoggeado);
+      console.log(this.usuarioLoggeado);
+    } else {
+      console.log('No loggeado');
+    }
     this.contador = 0;
     this.categoria = '';
     this.subcategoria = '1';
