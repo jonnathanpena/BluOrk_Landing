@@ -20,7 +20,11 @@ import {
   DxTextAreaModule,
   DxDateBoxModule,
   DxFormModule,
-  DxTagBoxModule
+  DxTagBoxModule,
+  DxScrollViewModule,
+  DxScrollViewComponent,
+  DxCheckBoxModule,
+  DxFileUploaderModule
 } from 'devextreme-angular';
 
 @NgModule({
@@ -38,7 +42,10 @@ import {
     DxTextAreaModule,
     DxDateBoxModule,
     DxFormModule,
-    DxTagBoxModule
+    DxTagBoxModule,
+    DxScrollViewModule,
+    DxCheckBoxModule,
+    DxFileUploaderModule
   ],
   declarations: [
     SignUpComponent

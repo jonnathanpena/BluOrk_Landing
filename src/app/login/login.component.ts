@@ -17,6 +17,7 @@ import {
 export class LoginComponent implements OnInit {
   usuario: any;
   guardando: boolean;
+  usuarioLoggeado; any = {};
 
   constructor(
     private services: LoginProvider,
@@ -24,6 +25,13 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    const usuarioLoggeado = localStorage.getItem('bluork_usuarioLoggeado');
+    if (usuarioLoggeado) {
+      this.usuarioLoggeado = JSON.parse(usuarioLoggeado);
+      console.log(this.usuarioLoggeado);
+    } else {
+      console.log('No loggeado');
+    }
     this.usuario = {
       email_users: '',
       clave: '',

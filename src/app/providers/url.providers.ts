@@ -152,8 +152,16 @@ export class ULRProvider {
     return this.dominio + 'upload/moveImageRequest.php';
   }
 
+  public moveImageProfile() {
+    return this.dominio + 'upload/moveImageProfile.php';
+  }
+
   public avartarRequestDir() {
     return this.dominio + 'documentos/imagenes/request/';
+  }
+
+  public avartarProfileDir() {
+    return this.dominio + 'documentos/imagenes/profile/';
   }
   /* END UPLOAD */
 
@@ -206,4 +214,46 @@ export class ULRProvider {
     return this.dominio + 'detsubcat/getById.php';
   }
   /* DETSUBCAT */
+
+  /* PROFILE */
+  public getAllProfiles() {
+    return this.dominio + 'profiles/getAll.php';
+  }
+
+  public getProfileByUser() {
+    return this.dominio + 'profiles/getByUser.php';
+  }
+
+  public insertProfile() {
+    return this.dominio + 'profiles/insert.php';
+  }
+
+  public updateProfile() {
+    return this.dominio + 'profiles/update.php';
+  }
+
+  public deleteProfile() {
+    return this.dominio + 'profiles/delete.php';
+  }
+  /* PROFILE */
+
+  /* EMPLOYEES */
+  public insertEmployee() {
+    return this.dominio + 'employees/insert.php';
+  }
+  /* END EMPLOYEES */
+
+  /* SKILL EMPLOYEE */
+  public getSkillsByEmployee() {
+    return this.dominio + 'skills_employee/getByEmployee.php';
+  }
+
+  public insertSkillsEmployee() {
+    return this.dominio + 'skills_employee/insert.php';
+  }
+
+  public deleteSkillEmployee() {
+    return this.dominio + 'skills_employee/delete.php';
+  }
+  /* END SKILL EMPLOYEE */
 }

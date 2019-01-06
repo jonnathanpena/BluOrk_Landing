@@ -43,12 +43,52 @@
                     <li>
                         <a routerLink="/request" class="site-nav-sub">Jobs</a>
                     </li>
-                    <li>
+                    <li *ngIf="!usuarioLoggeado.logeado">
                         <a routerLink="/login" class="btn btn-primary">Log In</a>
                     </li>
-                    <li>
+                    <li *ngIf="!usuarioLoggeado.logeado">
                         <a routerLink="/signup" class="btn btn-success">Sign Up</a>
                     </li>
+
+                    <li class="dropdown" *ngIf="usuarioLoggeado.logeado">
+                      <a href="#" class="dropdown-toggle btn-primary" data-toggle="dropdown">
+                        <span class="fa fa-user-o"></span> 
+                        <strong>{{usuarioLoggeado.firstName_users}} {{usuarioLoggeado.lastName_users}}</strong>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li>
+                            <div class="navbar-login">
+                                <div class="row">
+                                    <div class="col-lg-4 no-padding-right">
+                                        <p class="text-center">
+                                            <img [src]="usuarioLoggeado.avatar_prof">
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <p class="text-left"><strong>{{usuarioLoggeado.firstName_users}} {{usuarioLoggeado.lastName_users}}</strong></p>
+                                        <p class="text-left small">{{usuarioLoggeado.email_users}}</p>
+                                        <p class="text-left">
+                                            <a href="#" class="btn btn-primary btn-block btn-sm">Actualizar Datos</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="navbar-login navbar-login-session">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <p>
+                                            <a href="#" class="btn btn-danger btn-block">Cerrar Sesion</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                      </ul>
+                    </li>
+
                 </ul>
                 <!-- END Main Menu -->
             </nav>
@@ -135,12 +175,12 @@
                             </div>
                         </div>
                         <div class="form-group form-actions">
-                            <!--<div class="col-xs-6">
+                            <div class="col-xs-6">
                                 <label class="switch switch-primary" data-toggle="tooltip" title="Agree to the terms">
-                                  <input type="checkbox" id="register-terms" name="register-terms"><span></span>
+                                  <input type="checkbox" id="register-terms" name="register-terms" (click)="aceptaTerminos($event)"><span></span>
                                 </label>
                                 <a href="#modal-terms" data-toggle="modal" class="register-terms"><small>View Terms</small></a>
-                            </div>-->
+                            </div>
                             <div class="col-xs-offset-6 col-xs-6 text-right">
                                 <dx-button class="btn btn-sm btn-primary" [useSubmitBehavior]="true" [disabled]="guardando" text="Sign Up"></dx-button>
                             </div>
@@ -181,19 +221,33 @@
             <dxi-item itemType="group" cssClass="first-group" [colCount]="4">
               <dxi-item>
                 <div class="form-avatar">
-                  <img class="avatar">
+                  <img class="avatar" [src]="imagenAvatar" *ngIf="imagenAvatar!=''">
                 </div>
+                <dx-file-uploader
+                    name="file"
+                    [uploadUrl]="urlUpload"
+                    [multiple]="false"
+                    accept="image/*"
+                    [(value)]="fotos"
+                    uploadMode="instantly"
+                    allowedFileExtensions="['.jpg', '.png']"
+                    minFileSize="1024"
+                    maxFileSize="1024 * 1024"
+                    (onUploaded)="seSubioImagen($event)"
+                    (onUploadError)="uploadedError($event)"
+                    (onUploadAborted)="onUploadAborted($event)">
+                </dx-file-uploader>
               </dxi-item>
               <dxi-item itemType="group" [colSpan]="3">
                 <div class="form-group">
-                  <dx-text-box id="register-firstname" [(value)]="usuario.firstName_users" class="form-control input-lg" placeholder="First name">
+                  <dx-text-box id="register-firstname" [(value)]="usuario.firstName_users" class="form-control input-lg" placeholder="First name" [disabled]="true">
                     <dx-validator>
                       <dxi-validation-rule type="required" message=""></dxi-validation-rule>
                     </dx-validator>
                   </dx-text-box>
                 </div>
                 <div class="form-group">
-                  <dx-text-box id="register-lastname" [(value)]="usuario.lastName_users" class="form-control input-lg" placeholder="Last name">
+                  <dx-text-box id="register-lastname" [(value)]="usuario.lastName_users" class="form-control input-lg" placeholder="Last name" [disabled]="true">
                     <dx-validator>
                       <dxi-validation-rule type="required" message=""></dxi-validation-rule>
                     </dx-validator>
@@ -203,51 +257,44 @@
             </dxi-item>
             <dxi-item itemType="group" cssClass="second-group">
               <dxi-item>
-                <div class="form-group">
-                  <dx-select-box [items]="estados" displayExpr="name_states" valueExpr="id_states" [searchEnabled]="true" placeholder="Search State..." (onValueChanged)="cambioEstado($event)">
-                    <dx-validator>
-                      <dxi-validation-rule type="required" message=""></dxi-validation-rule>
-                    </dx-validator>
-                  </dx-select-box>
-                </div>
-                <div class="form-group">
-                  <dx-select-box [items]="ciudades" displayExpr="name_cities" valueExpr="id_cities" [searchEnabled]="true" placeholder="Search City..." (onValueChanged)="cambioCiudad($event)">
-                    <dx-validator>
-                      <dxi-validation-rule type="required" message=""></dxi-validation-rule>
-                    </dx-validator>
-                  </dx-select-box>
-                </div>
-                <div class="form-group">
-                  <dx-text-box id="register-lastname" [(value)]="perfil.address_profile" class="form-control input-lg" placeholder="Address">
-                    <dx-validator>
-                      <dxi-validation-rule type="required" message=""></dxi-validation-rule>
-                    </dx-validator>
-                  </dx-text-box>
-                </div>
-                <div class="form-group">
-                  <dx-text-box id="register-lastname" [(value)]="perfil.phone_prof" class="form-control input-lg" placeholder="Phone Number">
-                    <dx-validator>
-                      <dxi-validation-rule type="required" message=""></dxi-validation-rule>
-                    </dx-validator>
-                  </dx-text-box>
-                </div>
-                <div class="form-group">
-                  <dx-text-box id="register-lastname" [(value)]="empleado.age_employees" class="form-control input-lg" placeholder="Age">
-                    <dx-validator>
-                      <dxi-validation-rule type="required" message=""></dxi-validation-rule>
-                    </dx-validator>
-                  </dx-text-box>
-                </div>
-                <div class="form-group">
-                  <dx-text-box id="register-lastname" [(value)]="empleado.tax_id_employees" class="form-control input-lg" placeholder="Tax ID">
-                    <dx-validator>
-                      <dxi-validation-rule type="required" message=""></dxi-validation-rule>
-                    </dx-validator>
-                  </dx-text-box>
-                </div>
-                <div class="form-group">
-                  <dx-tag-box [items]="tags" displayExpr="name_tags" valueExpr="id_tags" [searchEnabled]="true" placeholders="Select Skills..." (onValueChanged)="cambioTags($event)"></dx-tag-box>
-                </div>
+                <form id="form-contact" (submit)="guardarEmpleado($event)">
+                  <div class="form-group">
+                    <dx-text-box id="perfil.zipcode_prof" [(value)]="perfil.zipcode_prof" class="form-control input-lg" placeholder="ZIPCODE">
+                      <dx-validator>
+                        <dxi-validation-rule type="required" message=""></dxi-validation-rule>
+                      </dx-validator>
+                    </dx-text-box>
+                  </div>
+                  <div class="form-group">
+                    <dx-text-box id="perfil.address_profile" [(value)]="perfil.address_profile" class="form-control input-lg" placeholder="Address">
+                      <dx-validator>
+                        <dxi-validation-rule type="required" message=""></dxi-validation-rule>
+                      </dx-validator>
+                    </dx-text-box>
+                  </div>
+                  <div class="form-group">
+                    <dx-text-box id="perfil.phone_prof" [(value)]="perfil.phone_prof" class="form-control input-lg" placeholder="Phone Number">
+                      <dx-validator>
+                        <dxi-validation-rule type="required" message=""></dxi-validation-rule>
+                      </dx-validator>
+                    </dx-text-box>
+                  </div>
+                  <div class="form-group">
+                    <dx-tag-box [items]="tags" [value]="tagSeleccionados" displayExpr="name_subcat" valueExpr="id_subcat" [searchEnabled]="true" placeholders="Select Skills..." (onValueChanged)="cambioTags($event)">
+                      <dx-validator>
+                        <dxi-validation-rule type="required" message=""></dxi-validation-rule>
+                      </dx-validator>
+                    </dx-tag-box>
+                  </div>
+                  <div class="form-group">
+                    <dx-check-box [value]="adult" [width]="150" text="Are you adult?" (onValueChanged)="checkAdulto($event)"></dx-check-box>
+                  </div>
+                  <div class="form-group form-actions">
+                    <div class="col-xs-offset-6 col-xs-6 text-right">
+                      <dx-button class="btn btn-sm btn-primary" [useSubmitBehavior]="true" [disabled]="guardando" text="Finish"></dx-button>
+                    </div>
+                  </div>
+                </form>
               </dxi-item>
             </dxi-item>
           </dx-form>
@@ -263,7 +310,15 @@
         [width]="600"
         [(visible)]="popupVisibleEmployer">
         <div *dxTemplate="let data of 'content'">
-          <dx-form id="form">
+          <dx-scroll-view #scrollView
+            id="scrollview"
+            [scrollByContent]="scrollByContent"
+            [scrollByThumb]="scrollByThumb"
+            [showScrollbar]="scrollbarMode"
+            [bounceEnabled]="pullDown"
+            reachBottomText="Updating..."
+            [width]="580">
+              <dx-form id="form">
             <dxi-item itemType="group" cssClass="first-group" [colCount]="4">
               <dxi-item>
                 <div class="form-avatar">
@@ -290,53 +345,48 @@
             <dxi-item itemType="group" cssClass="second-group">
               <dxi-item>
                 <div class="form-group">
-                  <dx-select-box [items]="estados" displayExpr="name_states" valueExpr="id_states" [searchEnabled]="true" placeholder="Search State..." (onValueChanged)="cambioEstado($event)">
-                    <dx-validator>
-                      <dxi-validation-rule type="required" message=""></dxi-validation-rule>
-                    </dx-validator>
-                  </dx-select-box>
-                </div>
-                <div class="form-group">
-                  <dx-select-box [items]="ciudades" displayExpr="name_cities" valueExpr="id_cities" [searchEnabled]="true" placeholder="Search City..." (onValueChanged)="cambioCiudad($event)">
-                    <dx-validator>
-                      <dxi-validation-rule type="required" message=""></dxi-validation-rule>
-                    </dx-validator>
-                  </dx-select-box>
-                </div>
-                <div class="form-group">
-                  <dx-text-box id="register-lastname" [(value)]="perfil.address_profile" class="form-control input-lg" placeholder="Address">
-                    <dx-validator>
-                      <dxi-validation-rule type="required" message=""></dxi-validation-rule>
-                    </dx-validator>
-                  </dx-text-box>
-                </div>
-                <div class="form-group">
-                  <dx-text-box id="register-lastname" [(value)]="perfil.phone_prof" class="form-control input-lg" placeholder="Phone Number">
-                    <dx-validator>
-                      <dxi-validation-rule type="required" message=""></dxi-validation-rule>
-                    </dx-validator>
-                  </dx-text-box>
-                </div>
-                <div class="form-group">
-                  <dx-text-box id="register-lastname" [(value)]="empleado.age_employees" class="form-control input-lg" placeholder="Age">
-                    <dx-validator>
-                      <dxi-validation-rule type="required" message=""></dxi-validation-rule>
-                    </dx-validator>
-                  </dx-text-box>
-                </div>
-                <div class="form-group">
-                  <dx-text-box id="register-lastname" [(value)]="empleado.tax_id_employees" class="form-control input-lg" placeholder="Tax ID">
-                    <dx-validator>
-                      <dxi-validation-rule type="required" message=""></dxi-validation-rule>
-                    </dx-validator>
-                  </dx-text-box>
-                </div>
-                <div class="form-group">
-                  <dx-tag-box [items]="tags" displayExpr="name_tags" valueExpr="id_tags" [searchEnabled]="true" placeholders="Select Skills..." (onValueChanged)="cambioTags($event)"></dx-tag-box>
-                </div>
+                    <dx-text-box mode="number" id="perfil.zipcode_prof" [(value)]="perfil.zipcode_prof" class="form-control input-lg" placeholder="Zipcode">
+                      <dx-validator>
+                        <dxi-validation-rule type="required" message=""></dxi-validation-rule>
+                      </dx-validator>
+                    </dx-text-box>
+                  </div>
+                  <div class="form-group">
+                    <dx-text-box id="register-lastname" [(value)]="perfil.address_profile" class="form-control input-lg" placeholder="Address">
+                      <dx-validator>
+                        <dxi-validation-rule type="required" message=""></dxi-validation-rule>
+                      </dx-validator>
+                    </dx-text-box>
+                  </div>
+                  <div class="form-group">
+                    <dx-text-box id="register-lastname" [(value)]="perfil.phone_prof" class="form-control input-lg" placeholder="Phone Number">
+                      <dx-validator>
+                        <dxi-validation-rule type="required" message=""></dxi-validation-rule>
+                      </dx-validator>
+                    </dx-text-box>
+                  </div>
+                  <div class="form-group">
+                    <dx-text-box id="register-lastname" [(value)]="empleador.name_employers" class="form-control input-lg" placeholder="Bussines' Name">
+                    </dx-text-box>
+                  </div>
+                  <div class="form-group">
+                    <dx-text-box id="register-lastname" [(value)]="empleador.num_employees_employers" class="form-control input-lg" placeholder="Number of Employees">
+                      <dx-validator>
+                        <dxi-validation-rule type="required" message=""></dxi-validation-rule>
+                      </dx-validator>
+                    </dx-text-box>
+                  </div>
+                  <div class="form-group">
+                    <dx-select-box [items]="categorias" displayExpr="name_cat" valueExpr="id_cat" [searchEnabled]="true" placeholder="Search Category..." (onValueChanged)="cambioCategoria($event)">
+                      <dx-validator>
+                        <dxi-validation-rule type="required" message=""></dxi-validation-rule>
+                      </dx-validator>
+                    </dx-select-box>
+                  </div>
               </dxi-item>
             </dxi-item>
           </dx-form>
+          </dx-scroll-view>
         </div>
     </dx-popup>
 

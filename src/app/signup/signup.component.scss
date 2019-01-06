@@ -14,3 +14,59 @@ img.avatar {
     border: 1px solid #d2d3d5;
     border-radius: 50%;
 }
+
+::ng-deep .dx-fileuploader-input-container {
+    display: none;
+}
+
+::ng-deep .dx-fileuploader-files-container {
+    display: none;
+}
+
+::ng-deep .dx-fileuploader-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+// PERFIL
+.navbar-login {
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session {
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size {
+    font-size: 87px;
+}
+
+.no-padding-right {
+    padding-right: 0;
+    p {
+        img {
+            width: 100%;
+        }
+    }
+}
+
+div {
+    .navbar-login {
+        .row {
+            p {
+                color: #000;
+                margin-bottom: 5px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .site-nav ul {
+        width: auto;
+    }
+}
